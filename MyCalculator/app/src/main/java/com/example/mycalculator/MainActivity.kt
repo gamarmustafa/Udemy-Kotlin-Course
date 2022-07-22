@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onDigit(view: View) {
-        Toast.makeText(this, "Pressed", Toast.LENGTH_SHORT).show()
+
         tvInput?.append((view as Button).text)
         lastNumeric = true
         lastDot = false
@@ -77,12 +77,55 @@ class MainActivity : AppCompatActivity() {
                         one = prefix + one
                     }
 
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() - two.toDouble()).toString())
+                } else if (tvValue.contains("+")) {  //Addition
+                    val splitValue = tvValue.split("+")
+                    //99-1
+                    var one = splitValue[0]  //99
+                    var two = splitValue[1]  //1
 
-                    tvInput?.text = (one.toDouble() - two.toDouble()).toString()
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+
+
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() + two.toDouble()).toString())
+                } else if (tvValue.contains("/")) {  //Division
+                    val splitValue = tvValue.split("/")
+                    //99-1
+                    var one = splitValue[0]  //99
+                    var two = splitValue[1]  //1
+
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+
+
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() / two.toDouble()).toString())
+                } else if (tvValue.contains("*")) {  //Multiplication
+                    val splitValue = tvValue.split("*")
+                    //99-1
+                    var one = splitValue[0]  //99
+                    var two = splitValue[1]  //1
+
+                    if (prefix.isNotEmpty()) {
+                        one = prefix + one
+                    }
+
+
+                    tvInput?.text = removeZeroAfterDot((one.toDouble() * two.toDouble()).toString())
                 }
             } catch (e: ArithmeticException) {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun removeZeroAfterDot(result: String): String {
+        var value = result
+        if (result.contains(".0")) {
+            value = result.substring(0, result.length - 2)
+        }
+        return value
     }
 }

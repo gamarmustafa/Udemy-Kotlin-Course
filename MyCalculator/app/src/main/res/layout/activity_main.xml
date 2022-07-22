@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:textColor = "?android:textColorPrimary"
         android:id="@+id/tvInput"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -86,7 +87,7 @@
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:onClick="onDigit"
-            android:text="5 " />
+            android:text="5" />
 
         <Button
             android:id="@+id/btnSix"
