@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/QuizApp/app/src/main/res/drawable/default_option_border_bg.xml" value="0.2185" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/QuizApp/app/src/main/res/drawable/selected_option_border_bg.xml" value="0.1665" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/QuizApp/app/src/main/res/layout/activity_main.xml" value="0.21145833333333333" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/QuizApp/app/src/main/res/layout/activity_quiz_questions.xml" value="0.21145833333333333" />
       </map>
     </option>
   </component>
