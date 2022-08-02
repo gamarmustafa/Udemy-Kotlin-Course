@@ -24,13 +24,13 @@
         android:id="@+id/iv_trophy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:src="@drawable/ic_trophy" />
+        android:src="@drawable/ic_trophy" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Hey,Congratulations!"
+        android:text="Hey, Congratulations!"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold" />
