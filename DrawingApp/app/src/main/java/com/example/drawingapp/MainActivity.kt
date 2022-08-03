@@ -31,7 +31,8 @@ import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
-    var customProgressDialog:Dialog?=null
+    var customProgressDialog: Dialog? = null
+
     private val requestPermission: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
@@ -86,7 +87,6 @@ class MainActivity : AppCompatActivity() {
         btnGallery.setOnClickListener {
 
             requestStoragePermission()
-
         }
 
         val ibBrush: ImageButton = findViewById(R.id.ib_brush)
@@ -102,13 +102,13 @@ class MainActivity : AppCompatActivity() {
         val ibSave: ImageButton = findViewById(R.id.ib_save)
         ibSave.setOnClickListener {
 
-           if(isReadStorageAllowed()){
-               showProgressDialog()
-               lifecycleScope.launch {
-                   var flDrawingView: FrameLayout = findViewById(R.id.fl_drawing_view_container)
-                   saveBitmapFile(getBitmapFromView(flDrawingView))
-               }
-           }
+            if (isReadStorageAllowed()) {
+                showProgressDialog()
+                lifecycleScope.launch {
+                    var flDrawingView: FrameLayout = findViewById(R.id.fl_drawing_view_container)
+                    saveBitmapFile(getBitmapFromView(flDrawingView))
+                }
+            }
 
         }
     }
@@ -162,9 +162,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun isReadStorageAllowed():Boolean
-    {
-        var result = ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)
+    private fun isReadStorageAllowed(): Boolean {
+        var result =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         return result == PackageManager.PERMISSION_GRANTED
     }
 
@@ -244,13 +244,17 @@ class MainActivity : AppCompatActivity() {
                                 "File saved successfully :$result",
                                 Toast.LENGTH_SHORT
                             ).show()
-                        }else{
-                            Toast.makeText(this@MainActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                            shareImage(result)
+                        } else {
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
-                }
-                catch (e:Exception){
-                    result=""
+                } catch (e: Exception) {
+                    result = ""
                     e.printStackTrace()
                 }
             }
@@ -260,7 +264,7 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-    private fun showProgressDialog(){
+    private fun showProgressDialog() {
         customProgressDialog = Dialog(this@MainActivity)
 
         customProgressDialog?.setContentView(R.layout.dialog_custom_progress)
@@ -268,10 +272,21 @@ class MainActivity : AppCompatActivity() {
         customProgressDialog?.show()
 
     }
-    private fun cancelProgressDialog(){
-        if(customProgressDialog !=null){
+
+    private fun cancelProgressDialog() {
+        if (customProgressDialog != null) {
             customProgressDialog?.dismiss()
-            customProgressDialog=null
+            customProgressDialog = null
+        }
+    }
+
+    private fun shareImage(result: String) {
+        MediaScannerConnection.scanFile(this, arrayOf(result), null) { path, uri ->
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+            shareIntent.type = "image/png"
+            startActivity(Intent.createChooser(shareIntent,"Share"))
         }
     }
 }
