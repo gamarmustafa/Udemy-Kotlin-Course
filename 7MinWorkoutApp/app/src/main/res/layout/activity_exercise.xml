@@ -71,6 +71,31 @@
 
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/tvUpcomingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UPCOMING EXERCISE:"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/flRestView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tvUpcomingExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upcoming Exercise Name"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@id/tvUpcomingLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
@@ -96,6 +121,7 @@
         tools:visibility="visible" />
 
     <FrameLayout
+        android:layout_marginBottom="5dp"
         android:id="@+id/flExerciseView"
         android:layout_width="100dp"
         android:layout_height="100dp"
