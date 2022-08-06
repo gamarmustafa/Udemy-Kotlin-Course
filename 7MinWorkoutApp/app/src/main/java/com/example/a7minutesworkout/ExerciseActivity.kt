@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a7minutesworkout.databinding.ActivityExerciseBinding
 import com.example.a7minutesworkout.databinding.DialogCutomBackConfirmationBinding
@@ -28,11 +29,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var binding: ActivityExerciseBinding? = null
 
-    private var restTimerDuration: Long = 10
+    private var restTimerDuration: Long = 1
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
 
-    private var exerciseTimerDuration: Long = 30
+    private var exerciseTimerDuration: Long = 1
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
 
@@ -64,6 +65,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setupRestView()
         setupExerciseStatusRecyclerView()
     }
+
+//    override fun onStop() {
+//        if(tts != null){
+//            tts?.shutdown()
+//        }
+//        if(player != null){
+//            player?.stop()
+//            player?.release()
+//            player=null
+//        }
+//
+//        super.onStop()
+//    }
+
 
     override fun onBackPressed() {
         customDialogForBackButton()
