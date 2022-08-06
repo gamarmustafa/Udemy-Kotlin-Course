@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure?"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/question"
+        android:paddingLeft="40dp"
+        android:textColor="@color/black"
+        android:paddingRight="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="This will stop your workout. You've come this far, are you sure you want to quit?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sure"
+        />
+    
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"    
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent">
+        
+        <Button
+            android:id="@+id/btnYes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="30dp"
+            android:text="YES"/>
+        <Button
+            android:id="@+id/btnNo"
+            android:layout_marginEnd="10dp"
+            android:layout_width="0dp"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="NO"/>
+
+        
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
