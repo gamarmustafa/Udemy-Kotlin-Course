@@ -9,12 +9,16 @@
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable-v24/item_color_accent_border_ripple_bg.xml" value="0.1125" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/circlular_progress_bar.xml" value="0.1145" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/circular_progress_bar.xml" value="0.17" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/drawble_radio_group_tab_bg.xml" value="0.1105" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/drawble_units_tab_selector.xml" value="0.1105" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/drawble_units_tab_text_color_selector.xml" value="0.139" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/item_circular_color_accent_bg.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/item_circular_color_gray_background.xml" value="0.1865" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/drawable/item_circular_thin_color_accent_border.xml" value="0.1" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/activity_bmi.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/activity_bmi.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/activity_exercise.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/activity_final.xml" value="0.21145833333333333" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/activity_history.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/activity_main.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/dialog_cutom_back_confirmation.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/7MinWorkoutApp/app/src/main/res/layout/item_exercise_status.xml" value="0.21041666666666667" />
