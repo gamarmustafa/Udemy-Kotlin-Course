@@ -53,7 +53,7 @@ class HistoryActivity : AppCompatActivity() {
             else{
                 binding?.tvHistory?.visibility = View.GONE
                 binding?.rvHistory?.visibility = View.GONE
-                binding?.tvNoDataAvailable?.visibility = View.INVISIBLE
+                binding?.tvNoDataAvailable?.visibility = View.VISIBLE
             }
 
             }
