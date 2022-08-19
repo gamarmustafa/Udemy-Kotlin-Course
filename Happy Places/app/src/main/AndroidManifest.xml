@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.happyplaces">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,14 +19,20 @@
         tools:targetApi="31">
         <activity
             android:screenOrientation="portrait"
+            android:label="Happy Place Details"
             android:theme="@style/CustomNoActionBarTheme"
-            android:label="Add a Happy Place"
-            android:name=".AddHappyPlaceActivity"
+            android:name=".HappyPlaceDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".AddHappyPlaceActivity"
+            android:exported="false"
+            android:label="Add a Happy Place"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:theme="@style/CustomNoActionBarTheme" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,10 +40,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:exported="true"
-            android:name="im.dino.dbinspector.activities.DbInspectorActivity">
-            <intent-filter >
+            android:name="im.dino.dbinspector.activities.DbInspectorActivity"
+            android:exported="true">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
