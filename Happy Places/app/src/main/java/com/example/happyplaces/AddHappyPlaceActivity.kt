@@ -1,6 +1,7 @@
 package com.example.happyplaces
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -9,19 +10,27 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
+import android.location.Location
+import android.location.LocationManager
+import android.location.LocationRequest
 import android.net.Uri
-import android.os.Build.ID
+import android.os.Build.VERSION_CODES.M
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.happyplaces.R
 import com.example.happyplaces.database.DatabaseHandler
 import com.example.happyplaces.databinding.ActivityAddHappyPlaceBinding
 import com.example.happyplaces.models.HappyPlaceModel
+import com.example.happyplaces.utils.GetAddressFromLatLng
+import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
+import com.google.android.gms.location.LocationRequest.create
+import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
@@ -49,6 +58,8 @@ import java.util.*
 
     private var mHappyPlaceDetails: HappyPlaceModel? = null
 
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+
 class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +71,10 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
         binding?.toolbarAddPlace?.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+
         if(!Places.isInitialized()){
             Places.initialize(this@AddHappyPlaceActivity,
                 resources.getString(R.string.google_maps_api_key))
@@ -96,8 +111,43 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
         binding?.tvAddImage?.setOnClickListener(this)
         binding?.btnSave?.setOnClickListener(this)
         binding?.etLocation?.setOnClickListener(this)
+        binding?.tvSelectCurrentLocation?.setOnClickListener(this)
     }
+    private fun isLocationEnabled():Boolean{
+        val locationManager :LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return  locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+    @SuppressLint("MissingPermission")
+    private fun requestNewLocationData(){
+        var mLocationRequest = com.google.android.gms.location.LocationRequest()
+        mLocationRequest.priority = Priority.PRIORITY_HIGH_ACCURACY
+        mLocationRequest.interval=0
+        mLocationRequest.numUpdates=1
 
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest,mLocationCallBack, Looper.myLooper())
+
+    }
+    private val mLocationCallBack = object :LocationCallback(){
+        override fun onLocationResult(locationResult: LocationResult) {
+            val mLastLocation:Location? = locationResult.lastLocation
+            mLatitude = mLastLocation!!.latitude
+            Log.i("Current Latitude:","$mLatitude")
+            Log.i("Current Longitude:","$mLongitude")
+            mLongitude = mLastLocation!!.longitude
+
+            val addressTask = GetAddressFromLatLng(this@AddHappyPlaceActivity, mLatitude, mLongitude)
+            addressTask.setAddressListener(object: GetAddressFromLatLng.AddressListener{
+                override fun onAddressFound(address:String?){
+                    binding?.etLocation?.setText(address)
+                }
+                override fun onError(){
+                    Log.e("Get Address: ", "Something went wrong")
+                }
+            })
+            addressTask.getAddress()
+        }
+    }
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.et_date -> {
@@ -181,6 +231,36 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
                     e.printStackTrace()
                 }
             }
+            R.id.tv_select_current_location ->{
+                if(!isLocationEnabled()){
+                    Toast.makeText(this, "Your location is turned off. Please turn it on.",
+                        Toast.LENGTH_SHORT).show()
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }else{
+                    Dexter.withActivity(this)
+                        .withPermissions(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+                        .withListener(object : MultiplePermissionsListener {
+                            override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                                if (report!!.areAllPermissionsGranted()) {
+                                    requestNewLocationData()
+                                }
+                            }
+
+                            override fun onPermissionRationaleShouldBeShown(
+                                permissions: MutableList<PermissionRequest>?,
+                                token: PermissionToken?
+                            ) {
+                                showRationalDialogForPermissions()
+                            }
+                        }).onSameThread()
+                        .check()
+                }
+            }
+
         }
     }
 
