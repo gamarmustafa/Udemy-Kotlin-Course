@@ -117,6 +117,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/edit_text_hint_location"
                     android:inputType="text"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:textColor="@color/primary_text_color"
                     android:textColorHint="@color/secondary_text_color"
                     android:textSize="@dimen/edit_text_text_size" />
@@ -129,6 +131,7 @@
                 android:layout_marginTop="@dimen/add_screen_place_image_marginTop"
                 android:background="@drawable/shape_image_view_border"
                 android:padding="@dimen/add_screen_place_image_padding"
+
                 android:scaleType="centerCrop"
                 android:src="@drawable/add_screen_image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"

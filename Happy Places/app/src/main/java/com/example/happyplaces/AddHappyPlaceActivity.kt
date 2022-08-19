@@ -10,6 +10,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build.ID
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -21,6 +22,10 @@ import com.example.happyplaces.R
 import com.example.happyplaces.database.DatabaseHandler
 import com.example.happyplaces.databinding.ActivityAddHappyPlaceBinding
 import com.example.happyplaces.models.HappyPlaceModel
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -30,6 +35,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,6 +59,10 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding?.toolbarAddPlace?.setNavigationOnClickListener {
             onBackPressed()
+        }
+        if(!Places.isInitialized()){
+            Places.initialize(this@AddHappyPlaceActivity,
+                resources.getString(R.string.google_maps_api_key))
         }
 
         if(intent.hasExtra(MainActivity.EXTRA_PLACE_DETAILS)){
@@ -85,6 +95,7 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
         binding?.etDate?.setOnClickListener(this)
         binding?.tvAddImage?.setOnClickListener(this)
         binding?.btnSave?.setOnClickListener(this)
+        binding?.etLocation?.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -161,10 +172,20 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
 
                 }
             }
+            R.id.et_location -> {
+                try{
+                    val fields = listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG,Place.Field.ADDRESS)
+                    val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN,fields).build(this@AddHappyPlaceActivity)
+                    startActivityForResult(intent, PLACES_AUTOCOMPLETE_REQUEST_CODE)
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
         }
     }
 
     companion object {
+        private const val PLACES_AUTOCOMPLETE_REQUEST_CODE = 3
         private const val GALLERY = 1
         private const val CAMERA = 2
         private const val IMAGE_DIRECTORY = "HappyPlacesImages"
@@ -194,7 +215,12 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
                 binding?.ivPlaceImage?.setImageBitmap(thumbnail)
                 saveImageToInternalStorage = saveImageToInternalStorage(thumbnail)
                 Log.e("Saved image: ", "Path::$saveImageToInternalStorage")
-                saveImageToInternalStorage(thumbnail)
+                binding?.ivPlaceImage?.setImageBitmap(thumbnail)
+            }else if(requestCode == PLACES_AUTOCOMPLETE_REQUEST_CODE){
+                val place = Autocomplete.getPlaceFromIntent(data)
+                binding?.etLocation?.setText(place.address)
+                mLatitude = place.latLng!!.latitude
+                mLongitude = place.latLng!!.longitude
             }
         }
     }

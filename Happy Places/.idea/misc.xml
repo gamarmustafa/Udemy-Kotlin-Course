@@ -3,15 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/drawable/ic_action_add_24dp.xml" value="0.117" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/drawable/ic_delete_white_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/drawable/ic_edit_white_24dp.xml" value="0.115" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/drawable/shape_button_rounded.xml" value="0.1" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/drawable/shape_image_view_border.xml" value="0.1" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/layout/activity_add_happy_place.xml" value="0.22" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/layout/activity_happy_place_detail.xml" value="0.2" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/layout/item_happy_place.xml" value="0.22" />
+        <entry key="..\:/Users/User/Desktop/apps/Udemy-Kotlin-Course/Happy Places/app/src/main/res/layout/activity_add_happy_place.xml" value="0.2" />
       </map>
     </option>
   </component>
